@@ -1,0 +1,31 @@
+# Master Node
+wget https://raw.githubusercontent.com/akshu20791/Deployment-script/main/k8s-master.sh
+ls -l
+ls
+chmod 777 k8s-master.sh
+ls -l
+./k8s-master.sh
+
+-> kubeadm token create --print-join-command
+
+
+
+# Worker Node
+
+sudo su   # (if not already root)
+wget https://raw.githubusercontent.com/akshu20791/Deployment-script/main/k8s-nodes.sh
+ls
+ls -l
+chmod 777 k8s-nodes.sh
+./k8s-nodes.sh
+
+cmd: -
+modprobe br_netfilter
+echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+
+Now copy the join cmd from master and run it on wor
+
+
+kubeadm join 172.31.35.148:6443 --cri-socket unix:///var/run/cri-dockerd.sock --token mbiwpg.9gv3t8hjkgxf3p3u --discovery-token-ca-cert-hash sha256:ca8197ad7c0603258b7519e359b6228b89c9fa65497c3b52f0b5ee649c00c770
